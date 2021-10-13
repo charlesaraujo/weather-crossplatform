@@ -6,13 +6,12 @@ import {
   getCurrentPositionAsync,
   getLastKnownPositionAsync,
 } from "expo-location";
-
-import { WeatherInfo, UnitsPicker } from "./components";
-
+import { WeatherInfo, UnitsPicker, Loader } from "./components";
+import { Colors } from "./utils/Colors";
 import { API_URL, WEATHER_API_KEY } from "../weatherapi";
 
 export const Core: React.FC = () => {
-  const [erroMessage, setErroMessage] = React.useState("");
+  const [erroMessage, setErroMessage] = React.useState<string | null>(null);
   const [currentWeather, setCurrentWeather] = React.useState<any>(null);
   const [unitsSystem, setUnitsSystem] = React.useState<"metric" | "imperial">(
     "metric"
@@ -20,6 +19,7 @@ export const Core: React.FC = () => {
 
   const load = async (): Promise<void> => {
     setCurrentWeather(null);
+    setErroMessage(null);
     try {
       let { status } = await requestForegroundPermissionsAsync();
       if (status !== "granted") {
@@ -33,11 +33,9 @@ export const Core: React.FC = () => {
       const weaterUrl = `${API_URL}weather?lat=${latitude}&lon=${longitude}&lang=pt_br&units=${unitsSystem}&appid=${WEATHER_API_KEY}`;
       const response = await fetch(weaterUrl);
       const result = await response.json();
-      console.log(response.ok);
       if (response.ok) setCurrentWeather(result);
       else setErroMessage(result.message);
     } catch (error: any) {
-      console.log(error);
       setErroMessage(error.message);
     }
   };
@@ -46,11 +44,14 @@ export const Core: React.FC = () => {
     load();
   }, [unitsSystem]);
 
-  const loading = currentWeather ? (
-    <WeatherInfo currentWeather={currentWeather} />
-  ) : (
-    <Text>{erroMessage || "Criar loader"}</Text>
-  );
+  let loading: any = <Loader />;
+  if (currentWeather) loading = <WeatherInfo currentWeather={currentWeather} />;
+  if (erroMessage)
+    loading = (
+      <View style={styles.container}>
+        <Text style={styles.error}>{erroMessage}</Text>
+      </View>
+    );
 
   return (
     <View style={styles.container}>
@@ -76,5 +77,11 @@ const styles = StyleSheet.create({
     minWidth: 320,
     minHeight: 320,
     position: "relative",
+  },
+  error: {
+    alignSelf: "stretch",
+    textAlign: "center",
+    color: Colors.SECONDARY_COLOR,
+    fontSize: 30,
   },
 });
