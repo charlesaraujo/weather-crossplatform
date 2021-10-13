@@ -6,7 +6,7 @@ import {
   getCurrentPositionAsync,
 } from "expo-location";
 
-import { WeatherInfo } from "./components";
+import { WeatherInfo, UnitsPicker } from "./components";
 
 import { API_URL, WEATHER_API_KEY } from "../weatherapi";
 
@@ -18,6 +18,7 @@ export const Core: React.FC = () => {
   );
 
   const load = async (): Promise<void> => {
+    setCurrentWeather(null);
     try {
       let { status } = await requestForegroundPermissionsAsync();
       if (status !== "granted") {
@@ -38,18 +39,24 @@ export const Core: React.FC = () => {
 
   React.useEffect((): void => {
     load();
-  }, []);
+  }, [unitsSystem]);
 
   const loading = currentWeather ? (
     <WeatherInfo currentWeather={currentWeather} />
   ) : (
-    <Text>Criar loader</Text>
+    <Text>{errorMessage || "Criar loader"}</Text>
   );
 
   return (
     <View style={styles.container}>
       <StatusBar style="auto" />
-      <View style={styles.main}>{loading}</View>
+      <View style={styles.main}>
+        <UnitsPicker
+          unitsSystem={unitsSystem}
+          setUnitsSystem={setUnitsSystem}
+        />
+        {loading}
+      </View>
     </View>
   );
 };
@@ -57,14 +64,12 @@ export const Core: React.FC = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // backgroundColor: "#fff",
-    // alignItems: "center",
+    alignItems: "center",
     justifyContent: "center",
   },
   main: {
-    flex: 1,
-    // backgroundColor: "#fff",
-    // alignItems: "center",
-    justifyContent: "center",
+    minWidth: 320,
+    minHeight: 320,
+    position: "relative",
   },
 });

@@ -1,15 +1,16 @@
 import React from "react";
 import { View, Text, StyleSheet, Image } from "react-native";
 import { IMG_URL } from "../../weatherapi";
-import { ColorsLigth } from "../utils/Colors";
+import { Colors } from "../utils/Colors";
 
+const { PRIMARY_COLOR, SECONDARY_COLOR } = Colors;
 interface WeatherInfoProps {
   children?: React.ReactNode;
   currentWeather: any;
 }
 
 const styles = StyleSheet.create({
-  weatherInfo: {
+  info: {
     alignItems: "center",
   },
   icon: {
@@ -18,6 +19,17 @@ const styles = StyleSheet.create({
   },
   description: {
     textTransform: "capitalize",
+    fontSize: 16,
+  },
+  textPrimary: {
+    color: PRIMARY_COLOR,
+    fontSize: 40,
+  },
+  textSecondary: {
+    color: SECONDARY_COLOR,
+    fontSize: 20,
+    fontWeight: "500",
+    marginTop: 10,
   },
 });
 
@@ -32,11 +44,14 @@ export const WeatherInfo: React.FC<WeatherInfoProps> = ({ currentWeather }) => {
   const img = `${IMG_URL}${icon}@4x.png`;
 
   return (
-    <View style={styles.weatherInfo}>
-      <Text>{name}</Text>
+    <View style={styles.info}>
+      <Text style={styles.textSecondary}>{name}</Text>
       <Image style={styles.icon} source={{ uri: img }} />
-      <Text>{temp}</Text>
-      <Text style={styles.description}>{description}</Text>
+      <Text style={styles.textPrimary}>{temp}°</Text>
+      <Text style={[styles.textSecondary, styles.description]}>
+        {description}
+      </Text>
+      {/* <Text style={styles.textSecondary}>{main}</Text> */}
     </View>
   );
 };
