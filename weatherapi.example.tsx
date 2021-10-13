@@ -7,5 +7,6 @@
  */
 
 const WEATHER_API_KEY = "abcde";
+const API_URL = "https://api.openweathermap.org/data/2.5/";
 
-export default WEATHER_API_KEY;
+export { WEATHER_API_KEY, API_URL };

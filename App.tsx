@@ -1,4 +1,4 @@
-import { Core as App } from "./src/core";
+import { Core as App } from "./src";
 
 /**
  * Esse arquivo é apenas um wrapper do
