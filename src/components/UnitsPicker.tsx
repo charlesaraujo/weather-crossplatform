@@ -6,14 +6,10 @@ const styles = StyleSheet.create({
   container: {
     alignSelf: "stretch",
     alignItems: "center",
-    position: "absolute",
-    top: 24,
-    left: 0,
-    zIndex: 1,
   },
   wrapper: {
     width: 80,
-    flexDirection: "column",
+    flexDirection: "row",
     justifyContent: "space-between",
   },
   picker: {

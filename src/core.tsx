@@ -93,8 +93,7 @@ const styles = StyleSheet.create({
   },
   wrapper: {
     flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
+    marginTop: 24,
     position: "relative",
     maxWidth: 600,
   },

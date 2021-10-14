@@ -6,7 +6,7 @@ import { Colors } from "../utils/Colors";
 const styles = StyleSheet.create({
   container: {
     position: "absolute",
-    top: 24,
+    top: 0,
     right: 0,
     zIndex: 1,
   },
