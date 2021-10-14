@@ -40,7 +40,7 @@ export const WeatherInfo: React.FC<WeatherInfoProps> = ({ currentWeather }) => {
     name,
   } = currentWeather;
 
-  const { icon, main, description } = details;
+  const { icon, description } = details;
   const img = `${IMG_URL}${icon}@4x.png`;
 
   return (
@@ -51,7 +51,6 @@ export const WeatherInfo: React.FC<WeatherInfoProps> = ({ currentWeather }) => {
       <Text style={[styles.textSecondary, styles.description]}>
         {description}
       </Text>
-      {/* <Text style={styles.textSecondary}>{main}</Text> */}
     </View>
   );
 };

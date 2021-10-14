@@ -6,7 +6,13 @@ import {
   getCurrentPositionAsync,
   getLastKnownPositionAsync,
 } from "expo-location";
-import { WeatherInfo, UnitsPicker, Loader } from "./components";
+import {
+  WeatherInfo,
+  UnitsPicker,
+  Loader,
+  ReloadIcon,
+  WeatherDetails,
+} from "./components";
 import { Colors } from "./utils/Colors";
 import { API_URL, WEATHER_API_KEY } from "../weatherapi";
 
@@ -56,12 +62,14 @@ export const Core: React.FC = () => {
   return (
     <View style={styles.container}>
       <StatusBar style="auto" />
-      <View style={styles.main}>
+      <View style={styles.wrapper}>
+        <ReloadIcon load={load} />
         <UnitsPicker
           unitsSystem={unitsSystem}
           setUnitsSystem={setUnitsSystem}
         />
-        {loading}
+        <View style={styles.main}>{loading}</View>
+        <WeatherDetails />
       </View>
     </View>
   );
@@ -72,6 +80,15 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
+    position: "relative",
+    padding: 60,
+  },
+  wrapper: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    position: "relative",
+    maxWidth: 600,
   },
   main: {
     minWidth: 320,
