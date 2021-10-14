@@ -51,7 +51,16 @@ export const Core: React.FC = () => {
   }, [unitsSystem]);
 
   let loading: any = <Loader />;
-  if (currentWeather) loading = <WeatherInfo currentWeather={currentWeather} />;
+  if (currentWeather)
+    loading = (
+      <>
+        <WeatherInfo currentWeather={currentWeather} />
+        <WeatherDetails
+          unitsSystem={unitsSystem}
+          currentWeather={currentWeather}
+        />
+      </>
+    );
   if (erroMessage)
     loading = (
       <View style={styles.container}>
@@ -69,7 +78,6 @@ export const Core: React.FC = () => {
           setUnitsSystem={setUnitsSystem}
         />
         <View style={styles.main}>{loading}</View>
-        <WeatherDetails />
       </View>
     </View>
   );

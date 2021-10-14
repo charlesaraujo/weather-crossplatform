@@ -1,7 +1,7 @@
 import React from "react";
 import { View, StyleSheet, TouchableOpacity, Text } from "react-native";
 import { Colors } from "../utils/Colors";
-
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 const styles = StyleSheet.create({
   container: {
     alignSelf: "stretch",
@@ -9,6 +9,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     top: 24,
     left: 0,
+    zIndex: 1,
   },
   wrapper: {
     width: 80,
@@ -26,10 +27,10 @@ const styles = StyleSheet.create({
     borderWidth: 0,
   },
   text: {
-    fontSize: 18,
-    textAlign: "center",
+    // fontSize: 18,
+    // textAlign: "center",
     justifyContent: "center",
-    color: "#fff",
+    // color: "#fff",
   },
   textSelected: {
     color: Colors.SECONDARY_COLOR,
@@ -41,7 +42,6 @@ const styles = StyleSheet.create({
   },
 });
 interface UnitsPickerProps {
-  children?: React.ReactNode;
   unitsSystem: "metric" | "imperial";
   setUnitsSystem: Function;
 }
@@ -60,7 +60,13 @@ export const UnitsPicker: React.FC<UnitsPickerProps> = ({
             setUnitsSystem("metric");
           }}
         >
-          <Text style={[styles.text, isMetric && styles.textSelected]}>C°</Text>
+          <View style={[styles.text]}>
+            <MaterialCommunityIcons
+              name="temperature-celsius"
+              size={24}
+              color={isMetric ? Colors.SECONDARY_COLOR : "#fff"}
+            />
+          </View>
         </TouchableOpacity>
 
         <TouchableOpacity
@@ -69,9 +75,13 @@ export const UnitsPicker: React.FC<UnitsPickerProps> = ({
             setUnitsSystem("imperial");
           }}
         >
-          <Text style={[styles.text, !isMetric && styles.textSelected]}>
-            F°
-          </Text>
+          <View style={[styles.text]}>
+            <MaterialCommunityIcons
+              name="temperature-fahrenheit"
+              size={24}
+              color={!isMetric ? Colors.SECONDARY_COLOR : "#fff"}
+            />
+          </View>
         </TouchableOpacity>
       </View>
     </View>

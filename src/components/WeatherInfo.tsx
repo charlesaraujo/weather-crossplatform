@@ -5,7 +5,6 @@ import { Colors } from "../utils/Colors";
 
 const { PRIMARY_COLOR, SECONDARY_COLOR } = Colors;
 interface WeatherInfoProps {
-  children?: React.ReactNode;
   currentWeather: any;
 }
 
