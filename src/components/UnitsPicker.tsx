@@ -1,7 +1,8 @@
 import React from "react";
-import { View, StyleSheet, TouchableOpacity, Text } from "react-native";
+import { View, StyleSheet, TouchableOpacity } from "react-native";
 import { Colors } from "../utils/Colors";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+
 const styles = StyleSheet.create({
   container: {
     alignSelf: "stretch",
@@ -22,14 +23,8 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.PRIMARY_COLOR,
     borderWidth: 0,
   },
-  text: {
-    // fontSize: 18,
-    // textAlign: "center",
+  icon: {
     justifyContent: "center",
-    // color: "#fff",
-  },
-  textSelected: {
-    color: Colors.SECONDARY_COLOR,
   },
   selected: {
     borderWidth: 1,
@@ -56,7 +51,7 @@ export const UnitsPicker: React.FC<UnitsPickerProps> = ({
             setUnitsSystem("metric");
           }}
         >
-          <View style={[styles.text]}>
+          <View style={[styles.icon]}>
             <MaterialCommunityIcons
               name="temperature-celsius"
               size={24}
@@ -71,7 +66,7 @@ export const UnitsPicker: React.FC<UnitsPickerProps> = ({
             setUnitsSystem("imperial");
           }}
         >
-          <View style={[styles.text]}>
+          <View style={[styles.icon]}>
             <MaterialCommunityIcons
               name="temperature-fahrenheit"
               size={24}
