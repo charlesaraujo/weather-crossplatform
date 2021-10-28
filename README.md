@@ -1,11 +1,8 @@
 # weather-crossplatform
 a react native app using expo to crossplatform suport
 
-tech stack
-Expo
-React native
-Typescript
-openweathermap.org API
+### tech stack:
+Expo, React native, Typescript, openweathermap.org API
 
 `npm install`
 `npm start`
